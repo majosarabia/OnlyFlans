@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4 justify-content-center">
+        {% for producto in productos %}
+        <div class="card col-xs-12 col-md-6 col-lg-3 p-3">
+            <h5 class="card-title text-center">{{ producto.name }}</h5>
+            <img src="{{ producto.image_url }}" class="card-img-top" alt="{{ producto.name }}">
+            <div class="card-body">
+                <p class="card-text">{{ producto.description }}</p>
+                <p class="card-text">${{ producto.precio }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="py-5 col-12 text-center" style="background: white">
+    <div class="container">
+            <h1>Bienvenida/o {{ user.get_username|capfirst }}</h1>
+    </div> 
+</div>
+
+<div class="container py-5">
+    <div class="row g-4 justify-content-center">
+        {% for producto in productos %}
+        <div class="card col-12 col-md-6 col-lg-3 p-3">
+            <h5 class="card-title text-center">{{ producto.name }}</h5>
+            <img src="{{ producto.image_url }}" class="card-img-top" alt="{{ producto.name }}">
+            <div class="card-body">
+                <p class="card-text">{{ producto.description }}</p>
+                <p class="card-text">${{ producto.precio }}</p>
+                <a href="{% url 'detalle_flan' producto.flan_uuid %}" class="btn btn-primary btn-sm">Ver detalle</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

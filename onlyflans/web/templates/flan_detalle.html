@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4 align-items-center">
+        <div class="col-12 col-md-6">
+            <img src="{{ flan.image_url }}" class="img-fluid rounded" alt="{{ flan.name }}">
+        </div>
+        <div class="col-12 col-md-6">
+            <h1>{{ flan.name }}</h1>
+            <p class="lead">{{ flan.description }}</p>
+            <p class="fs-4">${{ flan.precio|floatformat:0 }}</p>
+            {% for tag in flan.tags.all %}
+                <span class="badge bg-dark m-1">{{ tag.name }}</span>
+            {% endfor %}
+            <div class="mt-4">
+                <a class="btn btn-primary" href="{% url 'contacto' %}">Contáctanos</a>
+                <a class="btn btn-outline-secondary" href="javascript:history.back()">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

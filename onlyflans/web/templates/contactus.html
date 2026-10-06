@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  form input:not([type="submit"]),
+  form textarea {
+    width: 100%;
+  }
+</style>
+
+<div class="container py-4">
+  <h1 class="text-center mb-4">Contáctanos</h1>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <form action="{% url 'contacto' %}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="mb-3">
+          {{ form.customer_name.label_tag }}
+          {{ form.customer_name }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.customer_email.label_tag }}
+          {{ form.customer_email }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.message.label_tag }}
+          {{ form.message }}
+        </div>
+
+        <div class="text-center">
+          <input type="submit" value="Enviar" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center my-4">
+  <div class="col-12 col-md-6 col-lg-4">
+
+    <h2 class="text-center mb-3">Iniciar sesión</h2>
+
+
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <p>Su nombre de usuario y contraseña no coinciden. Inténtalo de nuevo.</p>
+    </div>
+    {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+      <div class="alert alert-warning">
+        <p> Su cuenta no tiene acceso a esta página. Para continuar, inicie sesión con una cuenta que tenga acceso.</p>
+      </div>
+      {% else %}
+      <div class="alert alert-info">
+        <p>Por favor inicie sesión para ver esta página.</p>
+      </div>
+      {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="{{ form.username.id_for_label }}" class="form-label">Usuario</label>
+        <input type="text" name="username" id="{{ form.username.id_for_label }}"
+               class="form-control" autofocus required>
+      </div>
+
+      <div class="mb-3">
+        <label for="{{ form.password.id_for_label }}" class="form-label">Contraseña</label>
+        <input type="password" name="password" id="{{ form.password.id_for_label }}"
+               class="form-control" required>
+      </div>
+
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn btn-outline-primary w-100">Iniciar sesión</button>
+    </form>
+
+    {# Asume que configura la vista de restablecimiento de contraseña en su URLconf #}
+    <p><a href="{% url 'password_reset' %}">¿Olvidó su contraseña?</a></p>
+
+  </div>
+  </div>
+</div>
+
+{% endblock %}
